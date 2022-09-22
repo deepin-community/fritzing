@@ -1,0 +1,5 @@
+version=3
+
+opts="filenamemangle=s/(?:.*\/)?v?(\d[\d\.]*\S*)\.tar\.gz/fritzing-$1.tar.gz/,dversionmangle=s/\+dfsg\d?//" \
+	https://github.com/fritzing/fritzing-app/releases (?:.*/)?v?(\d[\d\.]*\S*)\.tar\.gz \
+	debian debian/do-dfsg-tarball

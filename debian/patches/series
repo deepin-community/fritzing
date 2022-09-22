@@ -1,0 +1,5 @@
+qreal-fix.patch
+hardening.patch
+system-libgit2.patch
+no-isystem-for-gcc6.patch
+reproducibility.patch

@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+DPKG_EXPORT_BUILDFLAGS = 1
+CFLAGS+=$(CPPFLAGS)
+CXXFLAGS+=$(CPPFLAGS)
+
+export QT_SELECT=qt5
+
+DESTDIR=$(CURDIR)/debian/fritzing
+
+%:
+	dh $@
+
+# Add here any variable or target overrides you need.
+
+# Here is Helmut Grohne's patch (to close #886667)
+$(DEB_BUILDDIR)/Makefile:
+	dh_auto_configure --builddirectory=$(DEB_BUILDDIR)
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f config.tests/boost/*.o config.tests/boost/boost \
+	  config.tests/boost/Makefile .qmake.cache config.log
+
+override_dh_install-arch:
+	dh_install -a
+	# install a custom shell script to launch fritzing
+	# to close bug  #847655
+	mv $(DESTDIR)/usr/bin/Fritzing $(DESTDIR)/usr/bin/fritzing.real
+	install -m 755 debian/Fritzing $(DESTDIR)/usr/bin/fritzing
+	sed -i -e 's/Exec=Fritzing/Exec=fritzing/' \
+	    $(DESTDIR)/usr/share/applications/org.fritzing.Fritzing.desktop
+
+get-packaged-orig-source:
+	uscan --download-current-version

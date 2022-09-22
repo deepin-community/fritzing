@@ -1,0 +1,54 @@
+#! /bin/sh
+
+SHARED_PARTS_DIR=/usr/share/fritzing/parts
+DATABASE_DISTRIB=/usr/share/fritzing/parts.db.distrib
+LOCAL_FRITZING=${HOME}/.local/lib/fritzing
+LOCAL_DATABASE=${LOCAL_FRITZING}/fritzing-parts/parts.db
+FRITZING_REAL=/usr/bin/fritzing.real
+
+########### check .local/lib/fritzing/fritzing-parts ################
+
+# create a local directory for parts
+[ -d ${LOCAL_FRITZING}/fritzing-parts/svg ] || \
+    mkdir -p ${LOCAL_FRITZING}/fritzing-parts/svg
+
+# create symlinks from this local directory to shared parts subdirectories
+# first, from ${SHARED_PARTS_DIR}
+for d in bins core  obsolete  scripts; do
+    [ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
+	ln -s ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
+done
+# later, from ${SHARED_PARTS_DIR}/svg
+for d in core  obsolete; do
+    [ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
+	ln -s ${SHARED_PARTS_DIR}/svg/$d ${LOCAL_FRITZING}/fritzing-parts/svg/
+done
+
+# for other subdirectories make a deep copy
+for d in contrib user; do
+    # first, from ${SHARED_PARTS_DIR}
+    [ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
+	cp -Rd ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
+    # later, from ${SHARED_PARTS_DIR}/svg
+    [ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
+	cp -Rd ${SHARED_PARTS_DIR}/svg/$d ${LOCAL_FRITZING}/fritzing-parts/svg/
+done 
+
+########### copy a template database ################################
+[ -f ${LOCAL_DATABASE} ] || \
+    cp ${DATABASE_DISTRIB} ${LOCAL_DATABASE}
+
+########### check .local/lib/fritzing/app  ##########################
+
+[ -d ${LOCAL_FRITZING}/app ] || mkdir -p ${LOCAL_FRITZING}/app
+
+[ -f ${LOCAL_FRITZING}/app/Fritzing ] || \
+    cp ${FRITZING_REAL} ${LOCAL_FRITZING}/app/Fritzing
+
+for d in help sketches translations; do
+    [ -e ${LOCAL_FRITZING}/app/$d ] || \
+	ln -s /usr/share/fritzing/$d ${LOCAL_FRITZING}/app
+done
+
+################ launch fritzing #####################################
+exec ${LOCAL_FRITZING}/app/Fritzing

@@ -1,0 +1,19 @@
+Description: Hardening patch
+Index: fritzing/phoenix.pro
+===================================================================
+--- fritzing.orig/phoenix.pro
++++ fritzing/phoenix.pro
+@@ -97,6 +97,13 @@ macx {
+     LIBS += -liconv
+ }
+ unix {
++    # hardening flags
++    QMAKE_CPPFLAGS *=$(shell dpkg-buildflags --get CPPFLAGS)
++    QMAKE_CFLAGS *= $(shell dpkg-buildflags --get CFLAGS)
++    QMAKE_CXXFLAGS *=$(shell dpkg-buildflags --get CXXFLAGS)
++    QMAKE_LFLAGS *=$(shell dpkg-buildflags --get LDFLAGS)
++
++
+     !macx { # unix is defined on mac
+         HARDWARE_PLATFORM = $$system(uname -m)
+         contains(HARDWARE_PLATFORM, x86_64) {

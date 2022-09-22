@@ -1,0 +1,128 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: fritzing
+Source: http://www.fritzing.org/download
+
+Files: *
+Copyright: 2007-2013 University of Applied Sciences Potsdam
+ 2013-2015 Friends-of-Fritzing foundation and IXDS
+License: GPL-3+
+Comment: here is a list of authors and contributors by source repository,
+ André Knörig <andre.knoerig@gmail.com>
+ Angelescu Constantin <titus0818@yahoo.com>
+ Chuck Harrison <cfharr@gmail.com>
+ David Perrenoud <david.perrenoud@gmail.com>
+ Fabian Althaus <bluearc@arcor.de>
+ Jacek Jaros <jacek@jaros.org.pl>
+ Jonathan Cohen <irascibl@gmail.com>
+ Naoto Yoshioka <yos@pb3.so-net.ne.jp>
+ Nushin Isabelle <nushin.isabelle@gmail.com>
+ Rodrigo Oliveira <rodrigo@simb.com.br>
+ Rohan Lloyd <rohanl@rohanl.com>
+ Snoozerworks <snoozerworks@gmail.com>
+ Stefan Hermann <stefanhermann79@gmail.com>
+
+Files:     src/lib/quazip/crypt.h
+           src/lib/quazip/unzip.h
+           src/lib/quazip/unzip.c
+           src/lib/quazip/zip.h
+           src/lib/quazip/zip.c
+Copyright: 1998-2005 Gilles Vollant
+License:   Zlib
+ This software is provided 'as-is', without any express or implied
+ warranty.  In no event will the authors be held liable for any damages
+ arising from the use of this software.
+ .
+ Permission is granted to anyone to use this software for any purpose,
+ including commercial applications, and to alter it and redistribute it
+ freely, subject to the following restrictions:
+ .
+ 1. The origin of this software must not be misrepresented; you must not
+ claim that you wrote the original software. If you use this software
+ in a product, an acknowledgment in the product documentation would be
+ appreciated but is not required.
+ 2. Altered source versions must be plainly marked as such, and must not be
+ misrepresented as being the original software.
+ 3. This notice may not be removed or altered from any source distribution.
+
+Files:     src/lib/qtsysteminfo/*
+Copyright: 2010 Adrian Łubik 
+License:   LGPL-2.0+
+ GNU LGPL v2 or newer
+ .
+ On Debian systems, the complete text of the GNU General Library Public
+ License Version 2 can be found in `/usr/share/common-licenses/LGPL-2'.
+
+Files:     src/autoroute/cmrouter/DBcell.cpp
+           src/autoroute/cmrouter/search.cpp
+           src/autoroute/cmrouter/search2.cpp
+           src/autoroute/cmrouter/tile.cpp
+	   src/autoroute/cmrouter/tile.h
+Copyright: 1985-1990 Regents of the University of California.
+License:   MIT
+ Permission to use, copy, modify, and distribute this software and its
+ documentation for any purpose and without notice appear in all copies.
+ The University of California makes no representations about the
+ suitability of this software for any purpose.  It is provided "as is"
+ without express or implied warranty.  Export of this software outside of
+ the United States of America may require an export license.
+
+Files:     parts/part-gen-scripts/obsolete/footgen/footgen.py
+Copyright: 2005-2007 Darrell Harmon
+License:   GPL-2.0+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., , 51 Franklin St, Fifth Floor, Boston,
+ MA 02110-1301, USA.
+ .
+ Added dih patch from David Carr - 8/28/2005 Darrell Harmon
+ .
+ 1/6/2007
+ Bugfix from David Carr to correct row and col reversal in BGA omitballs
+ Several improvements sent to me by Peter Baxendale, with some modification
+ by DLH: Square pin 1 on all through hole, optional inside silkscreen on
+ .
+ The FSF address in the above text is the old one.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ Version 2 can be found in `/usr/share/common-licenses/GPL-2'.
+
+Files: resources/fonts/*
+Copyright: 2005-2008 The Android Open Source Project
+License: Apache-2.0
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the Apache License, Version 2.0.
+ .
+ On Debian systems, the complete text of the Apache License, Version 2.0
+ can be found in `/usr/share/common-licenses/Apache-2.0'.
+
+Files: debian/*
+Copyright: 2010-2015 Enrique Hernández Bello <ehbello@gmail.com>
+License: GPL-3+
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or (at
+ your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+

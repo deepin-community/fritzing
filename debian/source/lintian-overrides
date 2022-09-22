@@ -1,0 +1,5 @@
+# the fonts under resources/fonts are not distributed in binary
+# packages, and the fonts in the source package come with the NOTICE
+# so there is no need to distribute the NOTICE file.
+
+fritzing source: missing-notice-file-for-apache-license resources/fonts/NOTICE

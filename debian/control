@@ -1,0 +1,44 @@
+Source: fritzing
+Maintainer: Enrique Hernández Bello <ehbello@gmail.com>
+Uploaders: Georges Khaznadar <georgesk@debian.org>
+Section: electronics
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               imagemagick,
+               qtbase5-dev,
+               libqt5serialport5-dev,
+               libqt5svg5-dev,
+               zlib1g-dev,
+               libboost-dev,
+               libgit2-dev,
+               sqlite3
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/georgesk/fritzing
+Vcs-Git: https://salsa.debian.org/georgesk/fritzing.git
+Homepage: https://fritzing.org
+
+Package: fritzing
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         fritzing-data (= ${source:Version}),
+         libqt5sql5-sqlite,
+	 fritzing-parts(>= 0.9.6~0)
+Description: Easy-to-use electronic design software
+ Fritzing is an open source project designed to help one transition from a
+ prototype to a finished project. Aimed at users who want to produce or document
+ circuits and experiments, one starts by building a physical prototype, then
+ recreating it with Fritzing’s graphical editor. From there one can generate a
+ schematic, PCB artwork, and PCB production files.
+
+Package: fritzing-data
+Architecture: all
+Depends: ${misc:Depends}
+Description: Easy-to-use electronic design software (data files)
+ Fritzing is an open source project designed to help one transition from a
+ prototype to a finished project. Aimed at users who want to produce or document
+ circuits and experiments, one starts by building a physical prototype, then
+ recreating it with Fritzing’s graphical editor. From there one can generate a
+ schematic, PCB artwork, and PCB production files.
+ .
+ This package contains the architecture independent data files for Fritzing.

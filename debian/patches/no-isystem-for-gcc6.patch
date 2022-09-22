@@ -1,0 +1,21 @@
+Quick and dirty fix for g++-6, which does not work with -isystem
+see: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129,
+     https://bugreports.qt.io/browse/QTBUG-53375,
+     https://codereview.qt-project.org/#/c/159215
+Index: fritzing/phoenix.pro
+===================================================================
+--- fritzing.orig/phoenix.pro
++++ fritzing/phoenix.pro
+@@ -103,6 +103,12 @@ unix {
+     QMAKE_CXXFLAGS *=$(shell dpkg-buildflags --get CXXFLAGS)
+     QMAKE_LFLAGS *=$(shell dpkg-buildflags --get LDFLAGS)
+ 
++# Quick and dirty fix for g++-6, which does not work with -isystem
++# see: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129,
++#      https://bugreports.qt.io/browse/QTBUG-53375,
++#      https://codereview.qt-project.org/#/c/159215
++#
++QMAKE_CFLAGS_ISYSTEM = -I
+ 
+     !macx { # unix is defined on mac
+         HARDWARE_PLATFORM = $$system(uname -m)

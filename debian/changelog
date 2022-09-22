@@ -1,0 +1,394 @@
+fritzing (0.9.6+dfsg-1) unstable; urgency=medium
+
+  * new upstream version
+  * refreshed debian patches, deleted some.
+  * upgraded version : debhelper-compat (= 13), Standards-Version: 4.6.0
+  * changed the file debian/fritzing.install to take in account the new
+    desktop file.
+  * exported fritzing's icon to debian/fritzing.png for the desktop file.
+  * removed the special target override_dh_install-indep
+  * disabled the parallel build, which is not reliable.
+  * as fritzing and fritzing-parts are currently built from separate
+    source repositories, and according to last e-mail about this bug,
+    Closes: #795552
+  * Used Paul Wise's hints to simplify do-dfsg-tarball. Closes: #962096
+  * files have been renamed in previous releases, fritzing->fritzing-real,
+    and Fritzing -> fritzing. Closes: #858192
+  * checked that fritzing correctly opens the interface.
+    Closes: #920044
+  * removed an unused target from d/rules, 'update-upstream-changelog'
+  * added a target override_dh_auto_clean to clean files under
+    config.tests/boost
+  * modified and improved d/fritzing.install, d/fritzing-data.install and
+    d/fritzing.manpages to fix all the errors triggered by dh_missing
+  * modified the way fritzing is launched, in order to have the application
+    copied to each user's ~/.local directory
+  * increased the dependency on fritzing-parts, now it must have a release
+    number >= 0.9.6~0
+  * removed debian/fritzing.men since a destop file is provided
+  * fixed d/copyright (duplicate field in l. 59, old-fsf-address)
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sun, 22 Aug 2021 22:51:03 +0200
+
+fritzing (0.9.3b+dfsg-10) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Use secure copyright file specification URI.
+  * Wrap long lines in changelog entries: 0.7.10b-1.
+  * Use secure URI in Homepage field.
+  * Bump debhelper from old 11 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Georges Khaznadar ]
+  * Bumped Standards-version to 4.5.1, debhelper to 13
+
+ -- Georges Khaznadar <georgesk@debian.org>  Mon, 23 Nov 2020 19:22:31 +0100
+
+fritzing (0.9.3b+dfsg-9) unstable; urgency=medium
+
+  * modified d/rules to use an existing file rather than a file
+    *not installed* by the binary build, to install during an
+    independent build. Closes:  #916709
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sun, 30 Dec 2018 16:01:35 +0100
+
+fritzing (0.9.3b+dfsg-8) unstable; urgency=medium
+
+  * split override_dh_install into override_dh_install-arch and
+    override_dh_install-indep. Closes: #916709
+
+ -- Georges Khaznadar <georgesk@debian.org>  Thu, 20 Dec 2018 20:16:12 +0100
+
+fritzing (0.9.3b+dfsg-7) unstable; urgency=medium
+
+  * modified override_dh_install because the build failed on many
+    architectures.
+
+ -- Georges Khaznadar <georgesk@debian.org>  Fri, 23 Nov 2018 11:05:09 +0100
+
+fritzing (0.9.3b+dfsg-6) unstable; urgency=medium
+
+  * Applied Jeremy Bicha's patch, thanks! Closes: #880046
+  * upgraded Standards-Version and dh level
+  * modified VCS locations since the package is no longer maintained
+    actively in https://code.launchpad.net/~ehbello/fritzing/debian
+  * rewritten debian/rules to use debhelper (version >=11)
+  * made a dependency on fritzing-parts. Closes: #863057; Closes: #893462
+  * applied Helmut Grohne's patch. Closes: #886667
+  * forgot previously to close that bug, after defining a custom
+    script (debian/Fritzing). Closes: #847655
+  * removed the build-dependency on cdbs
+  * added a lintian override, since the fonts under resources/fonts are not
+    distributed in binary packages
+  * removed the category EDA from fritzing.desktop
+  * updated d/fritzing.menu to launch fritzing, not Fritzing
+  * modified the hardening patch: replaced QMAKE_LDFLAGS by QMAKE_LFLAGS.
+    Closes: #876502
+  * updated d/copyright, thanks to Osamu Aoki. Closes: #795648
+  * applied Chris Lamb's patch, thanks! Closes: #858152
+
+ -- Georges Khaznadar <georgesk@debian.org>  Tue, 20 Nov 2018 17:17:18 +0100
+
+fritzing (0.9.3b+dfsg-5) unstable; urgency=medium
+
+  * made little modification to force the execution from the directory
+    /usr/share/fritzing/parts; Closes: #891842; Closes: #847655 as
+    somebody who types 'fritzing' from the command line will no longer
+    launch the "unprotected" binary.
+
+ -- Georges Khaznadar <georgesk@debian.org>  Thu, 17 May 2018 20:14:32 +0200
+
+fritzing (0.9.3b+dfsg-4.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Set new "proxy" parameter in git_remote_connect to NULL (Closes: 872847)
+  * Bump libgit2 build-dependency to >= 0.25 due to above patch.
+
+ -- Peter Michael Green <plugwash@debian.org>  Thu, 19 Oct 2017 14:43:00 +0000
+
+fritzing (0.9.3b+dfsg-4) unstable; urgency=medium
+
+  * created a shell script to launch fritzing with a special pwd.
+    Closes: #847655
+  * enabled parallel build
+  * patched the desktop file
+
+ -- Georges Khaznadar <georgesk@debian.org>  Mon, 23 Jan 2017 17:27:29 +0100
+
+fritzing (0.9.3b+dfsg-3) unstable; urgency=medium
+
+  * removed the lines which caused a failure with architectures
+    other than i386 and amd-64. Closes: #843003
+
+ -- Georges Khaznadar <georgesk@debian.org>  Mon, 14 Nov 2016 16:56:44 +0100
+
+fritzing (0.9.3b+dfsg-2) unstable; urgency=medium
+
+  * Changed the way libgit2 is declared for linking in phoenix.pro
+    Closes: #843003
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sun, 13 Nov 2016 23:01:28 +0100
+
+fritzing (0.9.3b+dfsg-1) unstable; urgency=medium
+
+  [ Enrique Hernández Bello ]
+  * Removed unused CC-BY-SA-3.0 license from debian/copyright
+  * New upstream version.
+  * Removed menuicon-name.patch and intel-parts-icon.patch
+  * Added libgit2-dev (>= 0.24.1) to build-dependency.
+  * Added system-libgit2.patch to debian/patches
+  * Added git-remote-connect.patch to debian/patches
+  * Removed bins/ and pdb/ directory of fritzing-data.install
+  * Removed fritzing-parts dependency. Only it suggested.
+
+  [ Georges Khaznadar ]
+  * repeated previous line: Fixes icon of desktop menu entry. (Closes: #795554)
+  * erased the file 'control' at root level
+  * new upstream version, Closes: #841226
+  * modified the file phoenix.pro, to prevent using -isystem during the
+    compilation and triggering a bug. See a discussion about it at
+    https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129
+    This modification allows the compilation with GCC6.
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Mon, 09 May 2016 21:02:32 +0100
+
+fritzing (0.9.2b+dfsg-4) unstable; urgency=medium
+
+  * Fixes icon of desktop menu entry. (Closes: #795554)
+  * Fixes wrong icon filename in Intel parts bin file (Closes: #815003).
+  * Upgraded Standards-Version to 3.9.8
+  * Fixed License keyword in debian/copyright.
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Wed, 04 May 2016 11:01:48 +0100
+
+fritzing (0.9.2b+dfsg-3) unstable; urgency=medium
+
+  * modified the versioned dependency on fritzing-parts. Closes: #801276
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sun, 13 Dec 2015 19:43:09 +0100
+
+fritzing (0.9.2b+dfsg-2) unstable; urgency=medium
+
+  * recompiled to upload it into unstable rather than experimental
+
+ -- Georges Khaznadar <georgesk@debian.org>  Thu, 01 Oct 2015 19:38:55 +0200
+
+fritzing (0.9.2b+dfsg-1) unstable; urgency=medium
+
+  [ Enrique Hernández Bello ]
+  * New upstream version (Closes: #785151, #783691)
+  * Updated uscan download url in debian/watch (Closes: #785148)
+    Thanks to Jan Niehusmann <jan@gondor.com>
+  * Added filenamemangle rule in debian/watch
+  * Remove uneeded dependencies (Closes: #784378, #784380).
+    Thanks to Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>
+  * Added rule get-packaged-orig-source in debian/rules
+  * Switched to Qt5 libs.
+  * Deleted debian/fritzing.desktop in favor of upstream version.
+  * Added get-packaged-orig-source rule to debian/rules for bzr-buildpackage
+  * Updated upstream changelog.
+  * Updated debian/copyright file.
+  * Deleted debian/update-copyright
+  * Added fritzing-parts as dependency.
+  * Upgraded Standards-Version to 3.9.6
+
+  [ Georges Khaznadar ]
+  * restored lines in d/changelog which came from Lisandro's NMU.
+  * chose experimental as target distribution since the dependency on
+    fritzing-parts cannot be fulfilled in unstable before this package
+    undergoes the NEW process.
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Sun, 25 Jan 2015 16:03:32 +0000
+
+fritzing (0.9.0b+dfsg-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove uneeded dependencies (Closes: #784378, #784380).
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Sat, 30 May 2015 11:37:24 -0300
+
+fritzing (0.9.0b+dfsg-1) unstable; urgency=medium
+
+  [ Enrique Hernández Bello ]
+  * Fixed regular expression for version mangle in debian/watch file.
+  * Fixed versioning of dfsg tarballs.
+  * New upstream version.
+  * Updated upstream changelog.
+  * Updated copyright file.
+  * Replaced build-dependency on hardening-wrapper by dpkg-buildflags.
+
+  [ Georges Khaznadar ]
+  * recompiled the source, checked a few package features
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Mon, 16 Jun 2014 01:16:32 +0100
+
+fritzing (0.8.7b+dfsg2-1) unstable; urgency=medium
+
+  [ Enrique Hernández Bello ]
+  * Fixed do-dfsg-tarball script to recognize paths with blank spaces.
+
+  [ Georges Khaznadar ]
+  * fixed the package versions's numbering isued by Enrique
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Sun, 15 Jun 2014 01:45:01 +0100
+
+fritzing (0.8.7b+dfsg-1) unstable; urgency=medium
+
+  * upgraded to the newest upstream release
+  * upgraded Standards-Version to 3.9.5
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sun, 09 Feb 2014 16:53:32 +0100
+
+fritzing (0.8.5b+dfsg-1) unstable; urgency=low
+
+  * added files to the list debain/sourceless
+  * upgraded to the newest upstream release
+  * modified debian/copyright to take in account new fonts and to take in
+    account modifications in the author database with the script
+    debian/update-copyright
+
+ -- Georges Khaznadar <georgesk@debian.org>  Wed, 25 Dec 2013 20:14:46 +0100
+
+fritzing (0.8.3b-1) unstable; urgency=low
+
+  [ Enrique Hernández Bello ]
+  * New upstream version.
+  * Updated README.source file.
+  * Updated upstream changelog.
+  * Runs update-copyright while building.
+  * Installs help, pdb and translation syntax xml files.
+    (Closes: #700592) (LP: #1184347)
+  * Installs Fritzing manpage provided by upstream sources.
+
+  [ Georges Khaznadar ]
+  * added a build-dependency on sqlite3, which is reqired for update-copyright
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Sat, 05 Oct 2013 21:30:40 +0100
+
+fritzing (0.8.0b-1) unstable; urgency=low
+
+  * upgraded to the newest upstream version
+  * noticed loads of new data in the new package, as SVG files.
+    Presumabily Closes: #700592
+  * converted debian/copyright to DEP5 format
+  * created a script to gather the name of authors of parts design
+
+ -- Georges Khaznadar <georgesk@debian.org>  Mon, 24 Jun 2013 11:19:30 +0200
+
+fritzing (0.7.12b-2) unstable; urgency=low
+
+  * applied Jeremy Bicha's and Scott Kitterman's patches. Closes: #702674
+
+ -- Georges Khaznadar <georgesk@debian.org>  Sat, 25 May 2013 23:46:11 +0200
+
+fritzing (0.7.12b-1) unstable; urgency=low
+
+  * Changed my Debemail
+  * Upgraded to the newest source version
+  * Upgraded compat, debhelper build-dependency, Standards-Version.
+  * applied Scott Kitterman's patch. Closes: #702674 (Fails to
+    build on arm*)
+  * Included boost libraries in build-dependencies. Closes: #702672
+  * Closes: #698891 as the package already depends on
+    libqt4-sql-sqlite
+  * added a build-dependency on hardening-wrapper and enabled its
+    use in debian/rules
+
+ -- Georges Khaznadar <georgesk@debian.org>  Thu, 25 Apr 2013 16:28:29 +0200
+
+fritzing (0.7.10b-1) unstable; urgency=low
+
+  * New upstream version. Closes: #661495, #692998
+  * Removed useless patches.
+  * Removed SetupAPI.lib from sourceless files.
+  * Skip dfsg tarball creation if there are no sourceless files.
+  * Added libqt4-sql-sqlite to dependencies. Thanks to Tom Hummel
+    <tom@bluespice.org>.
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Sun, 11 Nov 2012 21:38:56 +0000
+
+fritzing (0.7.7b+dfsg-1) unstable; urgency=low
+
+  * upgraded to the newer upstream version
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Sun, 19 Aug 2012 10:31:20 +0200
+
+fritzing (0.7.4b+dfsg-5) unstable; urgency=low
+
+  * applied a patch from peter green. Closes: #679588
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Thu, 19 Jul 2012 20:00:05 +0200
+
+fritzing (0.7.4b+dfsg-3) unstable; urgency=low
+
+  * applied a second patch from Jonathan Cohen.
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Fri, 29 Jun 2012 17:11:07 +0200
+
+fritzing (0.7.4b+dfsg-2) unstable; urgency=low
+
+  * applied Jonathan Cohen's patch, which should fix the compilation
+    issue for armel.
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Wed, 13 Jun 2012 19:41:31 +0200
+
+fritzing (0.7.4b+dfsg-1) unstable; urgency=low
+
+  * New upstream version (Closes: #661495, #660628)
+  * Added script to repack original tarball without sourceless files.
+  * Updated regular expression of Debian watch file.
+  * Deleted ftbfs_fix_for_armel_sh4.patch.
+  * Updated Standards-Version to 3.9.3
+  * Changed Vcs-Browser url in control file.
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Thu, 19 Apr 2012 15:38:29 +0100
+
+fritzing (0.6.3b+dfsg-4) UNRELEASED; urgency=low
+
+  * Refreshed ftbfs_fix_for_armel_sh4.patch with an extra modification
+    for armel (Closes: #639771)
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Sat, 03 Sep 2011 02:33:04 +0100
+
+fritzing (0.6.3b+dfsg-3) unstable; urgency=low
+
+  * Removed redundant build-dependencies.
+  * Repackaged the upstream source to remove sourceless binaries:
+    SetupAPI.Lib and a handful of PDF files.
+  * Applies ftbfs_fix_for_armel_sh4.patch (Closes: #639771)
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Tue, 30 Aug 2011 15:04:30 +0100
+
+fritzing (0.6.3b-2) unstable; urgency=low
+
+  * removed unneed build-dependencies on lbc6 and libstdc++6
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Fri, 26 Aug 2011 23:44:41 +0200
+
+fritzing (0.6.3b-1) unstable; urgency=low
+
+  * upgrapded to the newer upstream version
+  * parameters of the function GraphicsUtils::distanceFromLine in
+    src/svg/groundplanegenerator.cpp:767 are now declared as doubles,
+    which Closes: #636441
+  * the new version fixes src/utils/folderutils.cpp, which
+    Closes: #636061
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Fri, 26 Aug 2011 10:11:05 +0200
+
+fritzing (0.6.2b-2) unstable; urgency=low
+
+  * modified debian/control to add myself as an uploader
+  * Initial release (Closes: #601230) (LP: #230390) (Closes: #635155)
+  * fixed a template-stance in debian/copyright: Author(s) => Authors
+
+ -- Georges Khaznadar <georgesk@ofset.org>  Sat, 23 Jul 2011 15:49:31 +0200
+
+fritzing (0.6.2b-1) unstable; urgency=low
+
+  * Initial release (Closes: #601230) (LP: #230390)
+
+ -- Enrique Hernández Bello <ehbello@gmail.com>  Thu, 21 Jul 2011 13:07:49 +0100

@@ -1,0 +1,15 @@
+Index: fritzing/phoenix.pro
+===================================================================
+--- fritzing.orig/phoenix.pro
++++ fritzing/phoenix.pro
+@@ -111,8 +111,8 @@ unix {
+ QMAKE_CFLAGS_ISYSTEM = -I
+ 
+     !macx { # unix is defined on mac
+-        HARDWARE_PLATFORM = $$system(uname -m)
+-        contains(HARDWARE_PLATFORM, x86_64) {
++        HARDWARE_PLATFORM = $$system(dpkg-architecture --query DEB_TARGET_ARCH)
++        contains(HARDWARE_PLATFORM, amd64) {
+             DEFINES += LINUX_64
+         } else {
+             DEFINES += LINUX_32
