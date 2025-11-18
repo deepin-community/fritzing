@@ -2,7 +2,7 @@ Index: fritzing/phoenix.pro
 ===================================================================
 --- fritzing.orig/phoenix.pro
 +++ fritzing/phoenix.pro
-@@ -111,8 +111,8 @@ unix {
+@@ -106,8 +106,8 @@ unix {
  QMAKE_CFLAGS_ISYSTEM = -I
  
      !macx { # unix is defined on mac
@@ -13,3 +13,32 @@ Index: fritzing/phoenix.pro
              DEFINES += LINUX_64
          } else {
              DEFINES += LINUX_32
+Index: fritzing/pri/gitversion.pri
+===================================================================
+--- fritzing.orig/pri/gitversion.pri
++++ fritzing/pri/gitversion.pri
+@@ -17,7 +17,7 @@ $$(CI) {
+     GIT_VERSION = $$system($$BASE_GIT_COMMAND describe --tags 2> $$NULL_DEVICE)
+ }
+ 
+-GIT_DATE = $$system($$BASE_GIT_COMMAND show --no-patch --no-notes --pretty='%cd' HEAD --date=iso-strict 2> $$NULL_DEVICE)
++GIT_DATE = $$system( cd .. && date  -d \"$(dpkg-parsechangelog --show-field=Date)\" --iso-8601=seconds )
+ 
+ # Here we process the build date and time
+ win32 {
+@@ -31,9 +31,14 @@ macx {
+ }
+ 
+ !win32:!macx {
+-    BUILD_DATE = $$system( date --iso-8601=seconds )
++    BUILD_DATE = $$system( cd .. && date  -d \"$(dpkg-parsechangelog --show-field=Date)\" --iso-8601=seconds )
+ }
+ 
++GIT_VERSION = $$system( cd .. && echo debian/\"$(dpkg-parsechangelog -S Version)\" )
++
+ DEFINES += GIT_VERSION=\\\"$$GIT_VERSION\\\"
+ DEFINES += GIT_DATE=\\\"$$GIT_DATE\\\"
+ DEFINES += BUILD_DATE=\\\"$$BUILD_DATE\\\"
++
++message("Debian build: GIT_DATE and BUILD_DATE are $$BUILD_DATE")
++message("Debian build: GIT_Version is $$GIT_VERSION")

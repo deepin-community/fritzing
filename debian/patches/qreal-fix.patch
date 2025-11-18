@@ -3,7 +3,7 @@ Index: fritzing/src/partseditor/pemainwindow.cpp
 ===================================================================
 --- fritzing.orig/src/partseditor/pemainwindow.cpp
 +++ fritzing/src/partseditor/pemainwindow.cpp
-@@ -2419,10 +2419,10 @@ void PEMainWindow::terminalPointChanged(
+@@ -2407,10 +2407,10 @@ void PEMainWindow::terminalPointChanged(
  
  	QPointF p = pegi->terminalPoint();
  	if (coord == "x") {
@@ -20,7 +20,7 @@ Index: fritzing/src/partsbinpalette/graphicsflowlayout.cpp
 ===================================================================
 --- fritzing.orig/src/partsbinpalette/graphicsflowlayout.cpp
 +++ fritzing/src/partsbinpalette/graphicsflowlayout.cpp
-@@ -73,7 +73,7 @@ int GraphicsFlowLayout::doLayout(const Q
+@@ -72,7 +72,7 @@ int GraphicsFlowLayout::doLayout(const Q
  
  		x = nextX;
  		// item->preferredSize().height() returns qreal, armel compiler complains

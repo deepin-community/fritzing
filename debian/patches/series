@@ -1,5 +1,8 @@
+manpage.patch
 qreal-fix.patch
 hardening.patch
 system-libgit2.patch
 no-isystem-for-gcc6.patch
 reproducibility.patch
+other-libraries.patch
+qwheelevent-has-no-device-function.patch
