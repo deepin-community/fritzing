@@ -1,0 +1,64 @@
+Index: fritzing/pri/spicedetect.pri
+===================================================================
+--- fritzing.orig/pri/spicedetect.pri
++++ fritzing/pri/spicedetect.pri
+@@ -15,12 +15,18 @@
+ 
+ 
+ message("Using fritzing ngspice detect script.")
+-NGSPICEPATH = ../../ngspice-40
++
++## NGSPICEPATH = ../../ngspice-40
++# in Debian, provided libngspice0-dev is installed,
++# /usr/include/ngspice contains relevant headers.
++
++NGSPICEPATH = /usr/include/ngspice
++
+ NGSPICEPATH = $$absolute_path($${NGSPICEPATH})
+ 
+ exists($$NGSPICEPATH) {
+     message("using $${NGSPICEPATH}")
+-	INCLUDEPATH += $$NGSPICEPATH/include
++	INCLUDEPATH += $$NGSPICEPATH
+ } else {
+     error("ngspice not found in $${NGSPICEPATH}")
+ }
+Index: fritzing/pri/quazipdetect.pri
+===================================================================
+--- fritzing.orig/pri/quazipdetect.pri
++++ fritzing/pri/quazipdetect.pri
+@@ -5,27 +5,27 @@ message("Using fritzing quazip detect sc
+ SOURCES += \
+     src/zlibdummy.c \
+ 
+-exists($$absolute_path($$PWD/../../quazip_qt$$QT_MAJOR_VERSION)) {
+-        QUAZIPPATH = $$absolute_path($$PWD/../../quazip_qt$$QT_MAJOR_VERSION)
++exists(/usr/include/quazip5) {
++        ## QUAZIPPATH = $$absolute_path($$PWD/../../quazip_qt$$QT_MAJOR_VERSION)
++	# in Debian, the package libquazip5-dev provides /usr/include/quazip5
++	QUAZIPPATH = /usr/include/quazip5
+         message("found quazip in $${QUAZIPPATH}")
+     } else {
+         error("quazip could not be found.")
+     }
+ 
+-message("including $$absolute_path($${QUAZIPPATH}/include/quazip)")
++message("including $$absolute_path($${QUAZIPPATH})")
+ 
+ unix:!macx {
+     message("including quazip library on linux")
+-    INCLUDEPATH += $$absolute_path($${QUAZIPPATH}/include/quazip)
+-    LIBS += -L$$absolute_path($${QUAZIPPATH}/lib) -lquazip1-qt$$QT_MAJOR_VERSION
+-    QMAKE_RPATHDIR += $$absolute_path($${QUAZIPPATH}/lib)
++    INCLUDEPATH += $$absolute_path($${QUAZIPPATH})
++    LIBS += -lquazip5 -lQt5Core
+ }
+ 
+ macx {
+     message("including quazip library on mac os")
+     INCLUDEPATH += $$absolute_path($${QUAZIPPATH}/include/quazip)
+     LIBS += -L$$absolute_path($${QUAZIPPATH}/lib) -lquazip1-qt$$QT_MAJOR_VERSION
+-    QMAKE_RPATHDIR += $$absolute_path($${QUAZIPPATH}/lib)
+     LIBS += -lz
+ }
+ 

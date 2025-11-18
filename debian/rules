@@ -20,7 +20,8 @@ $(DEB_BUILDDIR)/Makefile:
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -f config.tests/boost/*.o config.tests/boost/boost \
-	  config.tests/boost/Makefile .qmake.cache config.log
+	  config.tests/boost/Makefile .qmake.cache config.log \
+	.qmake*
 
 override_dh_install-arch:
 	dh_install -a

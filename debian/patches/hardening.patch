@@ -3,7 +3,7 @@ Index: fritzing/phoenix.pro
 ===================================================================
 --- fritzing.orig/phoenix.pro
 +++ fritzing/phoenix.pro
-@@ -97,6 +97,13 @@ macx {
+@@ -92,6 +92,13 @@ macx {
      LIBS += -liconv
  }
  unix {

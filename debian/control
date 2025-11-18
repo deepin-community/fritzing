@@ -11,8 +11,11 @@ Build-Depends: debhelper-compat (= 13),
                zlib1g-dev,
                libboost-dev,
                libgit2-dev,
-               sqlite3
-Standards-Version: 4.6.0
+               sqlite3,
+	       libngspice0-dev,
+	       libquazip5-dev,
+	       libsvgpp-dev,
+Standards-Version: 4.6.2
 Vcs-Browser: https://salsa.debian.org/georgesk/fritzing
 Vcs-Git: https://salsa.debian.org/georgesk/fritzing.git
 Homepage: https://fritzing.org
@@ -23,7 +26,8 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          fritzing-data (= ${source:Version}),
          libqt5sql5-sqlite,
-	 fritzing-parts(>= 0.9.6~0)
+	 fritzing-parts(>= 0.9.6~0),
+	 zenity
 Description: Easy-to-use electronic design software
  Fritzing is an open source project designed to help one transition from a
  prototype to a finished project. Aimed at users who want to produce or document
@@ -34,6 +38,7 @@ Description: Easy-to-use electronic design software
 Package: fritzing-data
 Architecture: all
 Depends: ${misc:Depends}
+Multi-Arch: foreign
 Description: Easy-to-use electronic design software (data files)
  Fritzing is an open source project designed to help one transition from a
  prototype to a finished project. Aimed at users who want to produce or document

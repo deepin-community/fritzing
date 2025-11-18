@@ -1,0 +1,32 @@
+patched src/sketch/zoomablegraphicsview.cpp to prevent calling
+QWheelEvent::device, which is not implemented in Qt 5.15
+Index: fritzing/src/sketch/zoomablegraphicsview.cpp
+===================================================================
+--- fritzing.orig/src/sketch/zoomablegraphicsview.cpp
++++ fritzing/src/sketch/zoomablegraphicsview.cpp
+@@ -86,7 +86,7 @@ void ZoomableGraphicsView::wheelEvent(QW
+ //	qDebug() << "capabilities" << event->device()->capabilities();
+ //	qDebug() << "has pixelscroll" << event->device()->hasCapability(QInputDevice::Capability::PixelScroll);
+ //	qDebug() << "system id" << event->device()->systemId();
+-	qint64 systemId =  event->device()->systemId();
++  // qint64 systemId =  event->device()->systemId();
+ 
+ 	if (!m_acceptWheelEvents) {
+ 		QGraphicsView::wheelEvent(event);
+@@ -123,6 +123,8 @@ void ZoomableGraphicsView::wheelEvent(QW
+ 			dampen = shift;
+ 		}
+ 		break;
++	/* QwheeleEvent>device is not implemented with Qt5.15, so
++	   systemId cannot be defined and the case Guess cannot be honored !!!
+ 	case Guess:
+ //		qDebug() << "guess";
+ 		// Set things up for a touchpad
+@@ -153,6 +155,7 @@ void ZoomableGraphicsView::wheelEvent(QW
+ 			dampen = true;
+ 		}
+ 		break;
++	*/
+ 	case Pure:
+ //		qDebug() << "pure";
+ 		QGraphicsView::wheelEvent(event);

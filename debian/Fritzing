@@ -6,49 +6,73 @@ LOCAL_FRITZING=${HOME}/.local/lib/fritzing
 LOCAL_DATABASE=${LOCAL_FRITZING}/fritzing-parts/parts.db
 FRITZING_REAL=/usr/bin/fritzing.real
 
-########### check .local/lib/fritzing/fritzing-parts ################
+local_fritzing_parts_create_if_needed() {
+    ###create and populate .local/lib/fritzing/fritzing-parts if needed ###
 
-# create a local directory for parts
-[ -d ${LOCAL_FRITZING}/fritzing-parts/svg ] || \
-    mkdir -p ${LOCAL_FRITZING}/fritzing-parts/svg
+    # create a local directory for parts
+    [ -d ${LOCAL_FRITZING}/fritzing-parts/svg ] || \
+	mkdir -p ${LOCAL_FRITZING}/fritzing-parts/svg
 
-# create symlinks from this local directory to shared parts subdirectories
-# first, from ${SHARED_PARTS_DIR}
-for d in bins core  obsolete  scripts; do
-    [ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
-	ln -s ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
-done
-# later, from ${SHARED_PARTS_DIR}/svg
-for d in core  obsolete; do
-    [ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
-	ln -s ${SHARED_PARTS_DIR}/svg/$d ${LOCAL_FRITZING}/fritzing-parts/svg/
-done
-
-# for other subdirectories make a deep copy
-for d in contrib user; do
+    # create symlinks from this local directory to shared parts subdirectories
     # first, from ${SHARED_PARTS_DIR}
-    [ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
-	cp -Rd ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
+    for d in bins core  obsolete  scripts; do
+	[ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
+	    ln -s ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
+    done
     # later, from ${SHARED_PARTS_DIR}/svg
-    [ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
-	cp -Rd ${SHARED_PARTS_DIR}/svg/$d ${LOCAL_FRITZING}/fritzing-parts/svg/
-done 
+    for d in core  obsolete; do
+	[ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
+	    ln -s ${SHARED_PARTS_DIR}/svg/$d \
+	       ${LOCAL_FRITZING}/fritzing-parts/svg/
+    done
 
-########### copy a template database ################################
-[ -f ${LOCAL_DATABASE} ] || \
-    cp ${DATABASE_DISTRIB} ${LOCAL_DATABASE}
+    # for other subdirectories make a deep copy
+    for d in contrib user; do
+	# first, from ${SHARED_PARTS_DIR}
+	[ -e ${LOCAL_FRITZING}/fritzing-parts/$d ] || \
+	    cp -Rd ${SHARED_PARTS_DIR}/$d ${LOCAL_FRITZING}/fritzing-parts/
+	# later, from ${SHARED_PARTS_DIR}/svg
+	[ -e ${LOCAL_FRITZING}/fritzing-parts/svg/$d ] || \
+	    cp -Rd ${SHARED_PARTS_DIR}/svg/$d \
+	       ${LOCAL_FRITZING}/fritzing-parts/svg/
+    done
+}
 
-########### check .local/lib/fritzing/app  ##########################
+local_database_create_if_needed () {
+    ### copy a template database if there is none locally ###############
+    [ -f ${LOCAL_DATABASE} ] || \
+	cp ${DATABASE_DISTRIB} ${LOCAL_DATABASE}
+}
 
-[ -d ${LOCAL_FRITZING}/app ] || mkdir -p ${LOCAL_FRITZING}/app
+local_app_create_if_needed () {
+    ### create and populate .local/lib/fritzing/app if needed ###########
 
-[ -f ${LOCAL_FRITZING}/app/Fritzing ] || \
-    cp ${FRITZING_REAL} ${LOCAL_FRITZING}/app/Fritzing
+    [ -d ${LOCAL_FRITZING}/app ] || mkdir -p ${LOCAL_FRITZING}/app
 
-for d in help sketches translations; do
-    [ -e ${LOCAL_FRITZING}/app/$d ] || \
-	ln -s /usr/share/fritzing/$d ${LOCAL_FRITZING}/app
-done
+    [ -f ${LOCAL_FRITZING}/app/Fritzing ] || \
+	cp ${FRITZING_REAL} ${LOCAL_FRITZING}/app/Fritzing
+
+    for d in help sketches translations; do
+	[ -e ${LOCAL_FRITZING}/app/$d ] || \
+	    ln -s /usr/share/fritzing/$d ${LOCAL_FRITZING}/app
+    done
+}
+
+local_fritzing_parts_create_if_needed
+local_database_create_if_needed
+local_app_create_if_needed
+
+global_version=$(${FRITZING_REAL} --version | grep debian | sed 's%.*debian/\(.*\)%\1%')
+local_version=$(${LOCAL_FRITZING}/app/Fritzing --version | grep debian | \
+		    sed 's%.*debian/\(.*\)%\1%')
+
+if dpkg --compare-versions "$global_version" gt "$local_version"; then
+    if zenity --question --text="There is a new Fritzing version installed: $global_version. Should we replace the former version with the new one?"
+    then
+	rm -rf ${LOCAL_FRITZING}/app
+	local_app_create_if_needed
+    fi
+fi
 
 ################ launch fritzing #####################################
-exec ${LOCAL_FRITZING}/app/Fritzing
+exec ${LOCAL_FRITZING}/app/Fritzing "$@"

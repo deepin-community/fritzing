@@ -6,7 +6,7 @@ Index: fritzing/phoenix.pro
 ===================================================================
 --- fritzing.orig/phoenix.pro
 +++ fritzing/phoenix.pro
-@@ -103,6 +103,12 @@ unix {
+@@ -98,6 +98,12 @@ unix {
      QMAKE_CXXFLAGS *=$(shell dpkg-buildflags --get CXXFLAGS)
      QMAKE_LFLAGS *=$(shell dpkg-buildflags --get LDFLAGS)
  

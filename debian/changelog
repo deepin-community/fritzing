@@ -1,3 +1,50 @@
+fritzing (1.0.1-1) unstable; urgency=medium
+
+  * New upstream version 1.0.1 (Closes: #1021049)
+  * there are no more sourceless files, so delete debian/sourceless
+  * refreshed existing debian patches
+  * added build-dependencies on libngspice0-dev, libquazip5-dev,
+    libsvgpp-dev, and patched  pri/spicedetect.pri, pri/quazipdetect.pri
+    to give access to development libraries
+  * modified d/rules : cleaning also .qmake.stash
+  * modified debian/Fritzing, to forward startup script options to the
+    real binary. Closes: #1019371
+  * also modified debian/Fritzing to give the user an opportunity to
+    update the locally copied application when a new version is
+    installed globally.
+  * patched pri/gitversion.pri in order to use reproducible dates for the
+    variables GIT_DATE and BUILD_DATE
+  * patched src/sketch/zoomablegraphicsview.cpp to prevent calling
+    QWheelEvent::device, which is not implemented in Qt 5.15
+  * bumped Standards-Version: 4.6.2
+  * added debian/salsa-ci.yml
+  * created a patch to have a copy of Fritzing.1 as fritzing.1, and modified
+    debian/fritzing.manpages to install it; declared
+    usr/share/man/man1/Fritzing.1 in debian/not-installed
+  * removed the copyright notice for src/lib/quazip/*, for some files
+    under src/autoroute, for src/lib/qtsysteminfo/* and for
+    parts/[...]/footgen.py
+  * added resources/fonts/NOTICE in debian/fritzing.docs
+
+ -- Georges Khaznadar <georgesk@debian.org>  Thu, 23 Nov 2023 20:04:39 +0100
+
+fritzing (0.9.6+dfsg-3) unstable; urgency=medium
+
+  * updated debian/watch to use the new API from Github
+
+ -- Georges Khaznadar <georgesk@debian.org>  Wed, 02 Nov 2022 16:50:46 +0100
+
+fritzing (0.9.6+dfsg-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+    + fritzing-data: Add Multi-Arch: foreign.
+
+  [ Georges Khaznadar ]
+  * bumped Standards-Version: 4.6.0.2
+
+ -- Georges Khaznadar <georgesk@debian.org>  Fri, 04 Mar 2022 18:35:54 +0100
+
 fritzing (0.9.6+dfsg-1) unstable; urgency=medium
 
   * new upstream version
